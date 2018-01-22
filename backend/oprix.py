@@ -34,5 +34,3 @@ def search(query):
 
     return ans
 
-
-print(search(query))

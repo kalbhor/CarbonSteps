@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
+
 EMISSIONS = {
 	"nissan": {
 		"cars": [{
 			"almera": {
-				"range": "127 – 196 g/km",
+							"range": "127 – 196 g/km",
 				"avg": "161.5 g/km"
 			}
 		}, {
