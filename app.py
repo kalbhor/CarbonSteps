@@ -3,6 +3,7 @@ import os
 import json
 import glob
 import sys
+import zipfile
 from uuid import uuid4
 import carlookup
 from imgurpython import ImgurClient
@@ -73,7 +74,7 @@ def upload_complete(uuid):
         return "Error: UUID not found!"
 
     files = []
-    jsonfile = None
+    zip_file = None
     carfile = None
     car_results = None
     json_results = None
@@ -81,14 +82,17 @@ def upload_complete(uuid):
         fname = file.split(os.sep)[-1]
         ext = os.path.splitext(fname)[1]
         files.append(fname)
-
-        if ext == "json":
-            jsonfile = root+"/"+fname
+        print("Okay : " + ext)
+        print(fname)
+        if ext == ".zip":
+            zip_file = root+"/"+fname
         elif ext in [".jpg", ".jpeg", ".bmp", ".gif", ".png", ".svg", ".psd", ".raw"]:
             carfile = root+"/"+fname
 
-    upload_results = imgur_client.upload_from_path(carfile, anon=True)
-    if carfile is not None or jsonfile is not None:
+    if carfile is not None and zip_file is not None:
+        upload_results = imgur_client.upload_from_path(carfile, anon=True)
+        zip_ref = zipfile.ZipFile(zip_file)
+        zip_ref.extractall(root)
         car_name, car_results = carlookup.search(upload_results["link"])
         car_results["name"] = car_name
         timeline = ""
@@ -97,7 +101,7 @@ def upload_complete(uuid):
     return render_template("files.html",
         uuid=uuid,
         car_results = car_results,
-        timeline = json_results
+        timeline = zip_file
     )
 
 
