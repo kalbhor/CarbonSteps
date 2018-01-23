@@ -7,31 +7,8 @@
 <body>
 
 <h1>CarbonSteps</h1>
-
 This is a simple Python Flask web app to demonstrate an HTML5 multiple file
 uploader application combined with normal form data.<p>
-
-This uses JavaScript to post an Ajax upload to the back-end which gives us a
-nice progress bar to see the status of the upload (note: it doesn't break down
-the status per-picture, instead it's the status of the entire upload altogether).<p>
-
-A normal <code>&lt;form&gt;</code> tag is used for the upload. If the user has
-JavaScript disabled in their browser, a normal HTTP upload is posted to the
-back-end. The same endpoint is used in both cases: when the Ajax request does it,
-the server returns a unique ID to the front-end and JavaScript does the redirect.
-If the user has scripts disabled, the back-end will initiate the redirect for
-them instead.<p>
-
-You can upload files by using the multi-select file upload box (supported in
-most browsers and Internet Explorer 10+), or by dragging and dropping files into
-the dashed box below (again, in most browsers).<p>
-
-This demo app doesn't do anything with the other form data except for print it
-out in the terminal window, but it demonstrates that you <em>can</em> get to the
-other form data in addition to the uploaded files.<p>
-
-Only upload <strong>image type files</strong> in the form below.<p>
-
 <hr><p>
 
 <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
