@@ -15,33 +15,20 @@ uploader application combined with normal form data.<p>
    <strong>Car File:</strong><br>
     Select files OR drag them into the box below.
     <input id="file-picker" type="file" name="car" accept="image/*" multiple><p>
-
     <div id="dropbox">
         Drag and Drop Files Here
     </div><p>
 
     <strong>JSON Files:</strong><br>
     Select files OR drag them into the box below.
-    <input id="file-picker" type="file" name="file" multiple><p>
-
+    <input id="file-picker" type="file" name="zip" multiple><p>
     <div id="dropbox">
         Drag and Drop Files Here
     </div><p>
-
-
-    <fieldset id="progress" style="display: none">
-        <legend>Please wait..</legend>
-
-        <div class="progress-trough">
-            <div id="progress-bar" class="progress-bar">0%</div>
-        </div>
-    </fieldset><p>
-
     <input type="submit" value="Upload!" id="upload-button">
 </form>
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/uploadr.js') }}"></script>
+
 
 </body>
 </html>
