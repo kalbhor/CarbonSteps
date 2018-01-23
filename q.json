@@ -1,0 +1,43 @@
+{
+
+
+"20" : {"ran": 0, "walked": 0.47796315, "flew": 0, "drove": 0.00082784105, "cycled": 0},
+
+"19" : {"ran": 0, "walked": 2.640488, "flew": 0, "drove": 0.17020956, "cycled": 0},
+
+"18" : {"ran": 0, "walked": 1.7762012, "flew": 0, "drove": 4.1950636, "cycled": 0},
+
+"17" : {"ran": 0, "walked": 2.8864946, "flew": 0, "drove": 0.29178098, "cycled": 0},
+
+"16" : {"ran": 0, "walked": 1.8969468, "flew": 0, "drove": 0.2238991, "cycled": 0},
+
+"15" : {"ran": 0.25336, "walked": 0.7354915, "flew": 0, "drove": 0.8898241, "cycled": 0},
+
+"14" : {"ran": 0, "walked": 2.0635152, "flew": 0, "drove": 5.5732465, "cycled": 0},
+
+"13" : {"ran": 0.013226937, "walked": 4.7009296, "flew": 0, "drove": 2.1786137, "cycled": 0},
+
+"12" : {"ran": 0, "walked": 6.4001513, "flew": 0, "drove": 1.6272137, "cycled": 0},
+
+"11" : {"ran": 0.043756954, "walked": 2.8245387, "flew": 0, "drove": 0.33446366, "cycled": 0},
+
+"10" : {"ran": 0, "walked": 14.077115, "flew": 0, "drove": 2.13335, "cycled": 0},
+
+"9" : {"ran": 0.06937377, "walked": 2.7448418, "flew": 0, "drove": 2.6210644, "cycled": 0},
+
+"8" : {"ran": 0, "walked": 3.6365967, "flew": 0, "drove": 0.11407893, "cycled": 0},
+
+"7" : {"ran": 0.0008335521, "walked": 4.409182, "flew": 0, "drove": 1.3862013, "cycled": 0},
+
+"6" : {"ran": 2.468194, "walked": 2.610286, "flew": 0, "drove": 4.6181793, "cycled": 0},
+
+"5" : {"ran": 0.044579986, "walked": 7.3238397, "flew": 0, "drove": 3.1655529, "cycled": 0},
+
+"4" : {"ran": 0, "walked": 0.02550586, "flew": 0, "drove": 252.66743, "cycled": 0},
+
+"3" : {"ran": 0.07192704, "walked": 3.674412, "flew": 0, "drove": 32.400303, "cycled": 0},
+
+"2" : {"ran": 0.060487878, "walked": 6.035536, "flew": 0, "drove": 147.97829, "cycled": 0},
+
+"1" : {"ran": 0, "walked": 1.4541152, "flew": 0, "drove": 699.33, "cycled": 0}, 
+ }
