@@ -24,7 +24,7 @@ def search(query):
             maxmatch = fuzz.ratio(img_results['model'], key)
             match = key
 
-    car = match
+    car = img_results['model']
 
-    return car, constants.EMISSIONS[brand]['cars'][0][car]
+    return (brand + '-' + car), constants.EMISSIONS[brand]['cars'][0][match]
 
