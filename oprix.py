@@ -14,13 +14,13 @@ def search(query):
     driver.get("http://mmr-demo.orpix-inc.com/detection/main/")
 
     email_field = driver.find_element_by_id("email_input")
-    email_field.send_keys("neel.vashisht@gmail.com")
+    email_field.send_keys("iilakshayii@gmail.com")
     search_field = driver.find_element_by_id("url_input")
     search_field.send_keys(query)
 
     sleep(3)
     driver.find_element_by_id("process_image").click()
-    sleep(8)
+    sleep(10)
 
     source = driver.page_source
     driver.quit()

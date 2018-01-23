@@ -7,7 +7,8 @@ from fuzzywuzzy import process
 def search(query):
     try:
         img_results = oprix.search(query)
-    except:
+    except Exception as e:
+        print(e)
         return None
     maxmatch = 0
     for key in constants.EMISSIONS:
@@ -25,5 +26,5 @@ def search(query):
 
     car = match
 
-    return constants.EMISSIONS[brand]['cars'][0][car]
+    return car, constants.EMISSIONS[brand]['cars'][0][car]
 

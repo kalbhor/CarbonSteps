@@ -5,10 +5,10 @@ import glob
 import sys
 from uuid import uuid4
 import carlookup
+from imgurpython import ImgurClient
 
 app = Flask(__name__)
-
-
+imgur_client = ImgurClient('9838eb2e63fe84d','d5d86cfcb9cf55a60c59cf989085892918d674a7')
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -83,12 +83,14 @@ def upload_complete(uuid):
         files.append(fname)
 
         if ext == "json":
-            jsonfile = fname
+            jsonfile = root+"/"+fname
         elif ext in [".jpg", ".jpeg", ".bmp", ".gif", ".png", ".svg", ".psd", ".raw"]:
-            carfile = fname
+            carfile = root+"/"+fname
 
+    upload_results = imgur_client.upload_from_path(carfile, anon=True)
     if carfile is not None or jsonfile is not None:
-        car_results = carlookup.search("http://d1arsn5g9mfrlq.cloudfront.net/sites/default/files/resize/remote/b16f3f72fbbe9aac21e8723dd85d2a32-720x471.jpg")
+        car_name, car_results = carlookup.search(upload_results["link"])
+        car_results["name"] = car_name
         timeline = ""
 
 
