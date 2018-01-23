@@ -80,6 +80,9 @@ def upload_complete(uuid):
         car_name, car_results = carlookup.search(upload_results["link"])
         car_results["name"] = car_name
         timeline = ""
+        json_path = root + "/" + "Takeout/Location\ History/Location\ History.json"
+        command = "./json-parser" + " " + json_path
+        os.system(command)
 
 
     return render_template("files.html",
