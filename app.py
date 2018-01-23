@@ -81,14 +81,19 @@ def upload_complete(uuid):
         car_results["name"] = car_name
         timeline = ""
         json_path = root + "/" + "Takeout/Location\ History/Location\ History.json"
-        command = "./json-parser" + " " + json_path
+        command = "./json-parser" + " " + json_path + " > " + root + "/data.json"
         os.system(command)
-
+        
+        with open(root+"/data.json") as json_data:
+            data = json_data.read().replace('\n', '')
+        data = data[:-2] + "}"
+        print(data)
+        timeline = json.load(data)
 
     return render_template("files.html",
         uuid=uuid,
         car_results = car_results,
-        timeline = zip_file
+        timeline = timeline
     )
 
 
@@ -103,7 +108,7 @@ if __name__ == '__main__':
     flask_options = dict(
         host='0.0.0.0',
         debug=True,
-        port=8080, 
+        port=80,
         threaded=True,
     )
 

@@ -14,11 +14,18 @@ values were submitted to the server.<p>
 
 <a href="{{ url_for('index') }}">Back to front page</a><p>
 
-<p> {{ timeline }} </p>
+{% for day in timeline %}
+{% for key, val in day %}
+    <h2> {{ key }} </h2>
+    <h2> {{ val }} </h2>
+{% endfor %}
+{% endfor %}
+
 {% for key, val in car_results.items() %}
     <h2>{{ key }}</h2>
     <h2> {{ val }}</h2>
 {% endfor %}
+
 
 </body>
 </html>
