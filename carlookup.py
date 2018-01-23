@@ -18,14 +18,12 @@ def search(query):
     brand = match
 
     maxmatch = 0
-    for key in constants.EMISSIONS[match]['cars']:
+    for key in constants.EMISSIONS[match]['cars'][0]:
         if fuzz.ratio(img_results['model'], key) > maxmatch:
             maxmatch = fuzz.ratio(img_results['model'], key)
             match = key
 
     car = match
 
-    return constants.EMISSIONS[brand]['cars'][car]
+    return constants.EMISSIONS[brand]['cars'][0][car]
 
-
-print(search("http://d1arsn5g9mfrlq.cloudfront.net/sites/default/files/resize/remote/b16f3f72fbbe9aac21e8723dd85d2a32-720x471.jpg"))
