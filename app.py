@@ -10,7 +10,7 @@ import constants
 from imgurpython import ImgurClient
 
 app = Flask(__name__)
-imgur_client = ImgurClient(os.environ['IMGURCLIENT'], os.environ['IMGURSECRET'])
+imgur_client = ImgurClient("9838eb2e63fe84d","d5d86cfcb9cf55a60c59cf989085892918d674a7")
 @app.route("/")
 def index():
     brands  = []
@@ -74,6 +74,7 @@ def upload_complete(uuid):
     carfile = None
     car_results = None
     timeline = None
+    emissions = 1
 
     for file in glob.glob("{}/*.*".format(root)):
         fname = file.split(os.sep)[-1]
@@ -92,6 +93,7 @@ def upload_complete(uuid):
         except Exception as e:
             print("EXCEPTION : " + str(e))
             car_results = {'name' : '', 'average' : '118.1 g/km', 'range' : '118.1 g/km'}
+        emissions = float(car_results['average'][:-5])
 
     if zip_file is not None:
         zip_ref = zipfile.ZipFile(zip_file)
@@ -113,6 +115,12 @@ def upload_complete(uuid):
 
         with open(root+"/data.json") as json_data:
             timeline = json.load(json_data)
+            for k, val in timeline.items():
+                timeline[k]["emissions"] = int(timeline[k]["drove"]) * emissions
+
+            timeline = [(v,k) for v,k in timeline.items()]
+            timeline.sort(key=lambda x: int(x[0]))
+        
 
     return render_template("files.html",
         uuid=uuid,
