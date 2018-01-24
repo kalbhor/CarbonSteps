@@ -20,7 +20,7 @@ def search(query):
 
     sleep(3)
     driver.find_element_by_id("process_image").click()
-    sleep(5)
+    sleep(8)
 
     source = driver.page_source
     driver.quit()
