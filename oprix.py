@@ -14,7 +14,7 @@ def search(query):
     driver.get("http://mmr-demo.orpix-inc.com/detection/main/")
 
     email_field = driver.find_element_by_id("email_input")
-    email_field.send_keys("destroyscream@gmail.com")
+    email_field.send_keys("lakshay.arnav@gmail.com")
     search_field = driver.find_element_by_id("url_input")
     search_field.send_keys(query)
 
@@ -23,6 +23,7 @@ def search(query):
     sleep(8)
 
     source = driver.page_source
+    print(source)
     driver.quit()
 
     soup = BeautifulSoup(source, "html.parser")
@@ -34,3 +35,5 @@ def search(query):
 
     return ans
 
+
+print(search(query))

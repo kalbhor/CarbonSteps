@@ -38,20 +38,24 @@ def upload():
     print("=== Form Data ===")
     for key, value in list(form.items()):
         print(key, "=>", value)
-
-    if request.files['car']:
+    try:
         car_file = request.files['car']
         destination = "/".join([target, car_file.filename])
         print("accept incoming file:", car_file.filename)
         print("save it to:", destination)
         car_file.save(destination)
+        print('Saved Car File')
+    except KeyError:
+        print('Did not get car file')
 
-    if request.files['zip']:
+    try:
         zip_file = request.files['zip']
         destination = "/".join([target, zip_file.filename])
         print("accept incoming file:", zip_file.filename)
         print("save it to:", destination)
         zip_file.save(destination)
+    except KeyError:
+        print('Did not get zip file')
 
     return redirect(url_for("upload_complete", uuid=upload_key))
 
@@ -66,12 +70,11 @@ def upload_complete(uuid):
         return "Error: UUID not found!"
 
 
-    '''
     zip_file = None
     carfile = None
     car_results = None
     timeline = None
-    '''
+
     for file in glob.glob("{}/*.*".format(root)):
         fname = file.split(os.sep)[-1]
         ext = os.path.splitext(fname)[1]
@@ -83,7 +86,9 @@ def upload_complete(uuid):
     if carfile is not None:
         try:
             upload_results = imgur_client.upload_from_path(carfile, anon=True)
+            print(upload_results)
             car_results = carlookup.search(upload_results["link"])
+            print(car_results)
         except Exception as e:
             print("EXCEPTION : " + str(e))
             car_results = {'name' : '', 'average' : '118.1 g/km', 'range' : '118.1 g/km'}
@@ -119,7 +124,7 @@ if __name__ == '__main__':
     flask_options = dict(
         host='0.0.0.0',
         debug=True,
-        port=8080,
+        port=80,
         threaded=True,
     )
 
