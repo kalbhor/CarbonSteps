@@ -5,11 +5,7 @@ from fuzzywuzzy import process
 
 
 def search(query):
-    try:
-        img_results = oprix.search(query)
-    except Exception as e:
-        print(e)
-        return '', {'average' : '118.1 g/km', 'range' : '118.1 g/km'}
+    img_results = oprix.search(query)
     maxmatch = 0
     for key in constants.EMISSIONS:
         if fuzz.ratio(img_results['brand'], key) > maxmatch:
@@ -24,10 +20,9 @@ def search(query):
             maxmatch = fuzz.ratio(img_results['model'], key)
             match = key
 
-    car = img_results['model']
+    ans = constants.EMISSIONS[brand]['cars'][0][match]
+    ans['name'] = (img_results['brand']+ '-' + img_results['model'])
+    return ans 
 
-    try:
-        return (img_results['brand']+ '-' + car), constants.EMISSIONS[brand]['cars'][0][match]
-    except:
-        '', {'average' : '118.1 g/km', 'range' : '118.1 g/km'}
+        
 

@@ -59,31 +59,39 @@ def upload_complete(uuid):
     if not os.path.isdir(root):
         return "Error: UUID not found!"
 
-    files = []
+
+    '''
     zip_file = None
     carfile = None
     car_results = None
-    json_results = None
+    timeline = None
+    '''
     for file in glob.glob("{}/*.*".format(root)):
         fname = file.split(os.sep)[-1]
         ext = os.path.splitext(fname)[1]
-        files.append(fname)
         if ext == ".zip":
             zip_file = root+"/"+fname
         elif ext in [".jpg", ".jpeg", ".bmp", ".gif", ".png", ".svg", ".psd", ".raw"]:
             carfile = root+"/"+fname
 
-    if carfile is not None and zip_file is not None:
-        upload_results = imgur_client.upload_from_path(carfile, anon=True)
+    if carfile is not None:
+        try:
+            upload_results = imgur_client.upload_from_path(carfile, anon=True)
+            car_results = carlookup.search(upload_results["link"])
+        except Exception as e:
+            print("EXCEPTION : " + str(e))
+            car_results = {'name' : '', 'average' : '118.1 g/km', 'range' : '118.1 g/km'}
+
+    if zip_file is not None:
         zip_ref = zipfile.ZipFile(zip_file)
         zip_ref.extractall(root)
-        car_name, car_results = carlookup.search(upload_results["link"])
-        car_results["name"] = car_name
-        timeline = ""
-        json_path = root + "/" + "Takeout/Location\ History/Location\ History.json"
-        command = "./json-parser" + " " + json_path + " > " + root + "/data.json"
+
+        json_path = root +  "/Takeout/Location\ History/Location\ History.json"
+        out_path = root + "/data.json"
+
+        command = "./json-parser" + " " + json_path + " > " + out_path
         os.system(command)
-        
+
         with open(root+"/data.json") as json_data:
             data = json_data.read().replace('\n', '')
 
@@ -95,8 +103,6 @@ def upload_complete(uuid):
         with open(root+"/data.json") as json_data:
             timeline = json.load(json_data)
 
-        print(timeline)
-
     return render_template("files.html",
         uuid=uuid,
         car_results = car_results,
@@ -107,7 +113,7 @@ if __name__ == '__main__':
     flask_options = dict(
         host='0.0.0.0',
         debug=True,
-        port=80,
+        port=8080,
         threaded=True,
     )
 
