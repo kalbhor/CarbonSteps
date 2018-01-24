@@ -5,32 +5,44 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 </head>
 <body>
-    <h1>CarbonSteps</h1>
+    <center><h1>CarbonSteps</h1></center>
 
-    <p>
+    <center>
+        <p>
         This is a simple Python Flask web app to demonstrate an HTML5 multiple file
         uploader application combined with normal form data.
-    </p>
+        </p>
+    </center>
 
-
+    <br /><br />
     <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-        <strong>Car File:</strong>
-        <input id="file-picker" type="file" name="car" accept="image/*">
+        <center>
+            <h4>Upload your car's image:</h4>
+            <input id="file-picker" type="file" name="car" accept="image/*">
+        </center>
 
+        <center>
+            <h3> OR </h3>
+        </center>
 
-        <label for="brand"><strong>Car brand:</strong></label>
-        <select name="brand">
-            <option value="auto" >Auto</option>
-            {% for brand in brands %}
-            <option value="{{ brand }}" >{{ brand }}</option>
-            {% endfor %}
-        </select
-
-
-
-        <strong>Zip File:</strong>
-        <input id="file-picker" type="file" name="zip">
-        <input type="submit" value="Upload!" id="upload-button">
+        <center>
+            <h4>Choose your car's brand:</h4>
+            <select name="brand">
+                <option value="auto" >Auto</option>
+                {% for brand in brands %}
+                <option value="{{ brand }}" >{{ brand }}</option>
+                {% endfor %}
+            </select>
+        </center>
+        <br /><br />
+        <center>
+            <h4>Zip File:</h4>
+            <input id="file-picker" type="file" name="zip">
+        </center>
+        <br /><br />
+        <center>
+            <input type="submit" value="Upload!" id="upload-button">
+        </center>
 
 </form>
 </body>
