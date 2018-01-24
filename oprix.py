@@ -14,7 +14,7 @@ def search(query):
     driver.get("http://mmr-demo.orpix-inc.com/detection/main/")
 
     email_field = driver.find_element_by_id("email_input")
-    email_field.send_keys("lakshay.arnav@gmail.com")
+    email_field.send_keys("prodigylevan@gmail.com")
     search_field = driver.find_element_by_id("url_input")
     search_field.send_keys(query)
 
