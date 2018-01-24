@@ -5,30 +5,32 @@
 </head>
 
 <body>
-
+<center>
 	<h1>Your results for this month are ready!</h1>
 	<p>Our machine learning algorithm is still learning! (Error rate < 10%)</p>
 
 	<a href="{{ url_for('index') }}">Back to front page</a><p>
 
 	{% if car_results is not none %}
-		<h1> Your vehicle results : </h1>
+		<h2> Your vehicle results : </h2>
 		{% for key, val in car_results.items() %}
-    		<h2>{{ key|title }} : {{ val|title }}</h2>
+    		<h3>{{ key|title }} : {{ val|title }}</h3>
 		{% endfor %}
 	{% endif %}
 
+	<hr>
 
 	{% if timeline is not none %}
-		{% for key, val in timeline.items() %}
-    		<h2> Day : {{ key }} </h2>
-			{% for k, v in val.items() %}
-    			<p> {{ k|title }} : {{ v|title }} </p>
-			{% endfor %}
+		{% for items in timeline %}
+    		<h2> Day : {{ items[0] }} </h2>
+    			<p> Drove : {{ items[1]["drove"]|title }}km</p>
+    			<p> Cycled: {{ items[1]["cycled"]|title }}km</p>
+    			<p> Walked: {{ items[1]["walked"]|title }}km</p>
+			<strong><p style="color:red">Emissions: {{ items[1]["emissions"]|title }}g of CO2</p></strong>
 		{% endfor %}
 	{% endif %}
 
 
-
+</center>
 </body>
 </html>
