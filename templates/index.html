@@ -1,48 +1,37 @@
-<!DOCTYPE html>
 <html>
 <head>
 <title>CarbonSteps</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 </head>
 <body>
+    <h1>CarbonSteps</h1>
 
-<h1>CarbonSteps</h1>
-This is a simple Python Flask web app to demonstrate an HTML5 multiple file
-uploader application combined with normal form data.<p>
-<hr><p>
+    <p>
+        This is a simple Python Flask web app to demonstrate an HTML5 multiple file
+        uploader application combined with normal form data.
+    </p>
 
-<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-   <strong>Car File:</strong><br>
-    Select files OR drag them into the box below.
-    <input id="file-picker" type="file" name="car" accept="image/*" multiple><p>
-    <div>
-        OR
-    </div><p>
 
-    <div>
-    <label for="brand">Car brand</label>
-    <select name="brand">
-    <option value="none" >None</option>
-    {% for brand in brands %}
-    <option value="{{ brand }}" >{{ brand }}</option>
-    {% endfor %}
-    </select
-    </div><p>
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <strong>Car File:</strong>
+        <input id="file-picker" type="file" name="car" accept="image/*">
 
-    <strong>JSON Files:</strong><br>
-    Select files OR drag them into the box below.
-    <input id="file-picker" type="file" name="zip" multiple><p>
-    <div id="dropbox">
-        Drag and Drop Files Here
-    </div><p>
+
+        <label for="brand"><strong>Car brand:</strong></label>
+        <select name="brand">
+            <option value="auto" >Auto</option>
+            {% for brand in brands %}
+            <option value="{{ brand }}" >{{ brand }}</option>
+            {% endfor %}
+        </select
 
 
 
-    <input type="submit" value="Upload!" id="upload-button">
+        <strong>Zip File:</strong>
+        <input id="file-picker" type="file" name="zip">
+        <input type="submit" value="Upload!" id="upload-button">
 
 </form>
-
-
-
 </body>
 </html>

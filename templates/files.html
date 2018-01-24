@@ -1,35 +1,33 @@
-<!DOCTYPE html>
 <html>
 <head>
-<title>Flask Multiple Upload</title>
+<title>CarbonSteps</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
-<h1>Upload Successful!</h1>
+	<h1>Your results for this month are ready!</h1>
+	<p>Our machine learning algorithm is still learning! (Error rate < 10%)</p>
 
-Here are the files you just uploaded. Your form data was discarded in this demo
-app, but if you check your terminal window you can see that all their names and
-values were submitted to the server.<p>
+	<a href="{{ url_for('index') }}">Back to front page</a><p>
 
-<a href="{{ url_for('index') }}">Back to front page</a><p>
+	{% if car_results is not none %}
+		<h1> Your vehicle results : </h1>
+		{% for key, val in car_results.items() %}
+    		<h2>{{ key|title }} : {{ val|title }}</h2>
+		{% endfor %}
+	{% endif %}
 
-{% if timeline is not none %}
-{% for key, val in timeline.items() %}
-    <h2> {{ key }} </h2>
-{% for k, v in val.items() %}
-    <p> {{ k }} </p>
-    <p> {{ v }} </p>
-{% endfor %}
-{% endfor %}
-{% endif %}
 
-{% if car_results is not none %}
-{% for key, val in car_results.items() %}
-    <h2>{{ key }}</h2>
-    <h2> {{ val }}</h2>
-{% endfor %}
-{% endif %}
+	{% if timeline is not none %}
+		{% for key, val in timeline.items() %}
+    		<h2> Day : {{ key }} </h2>
+			{% for k, v in val.items() %}
+    			<p> {{ k|title }} : {{ v|title }} </p>
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
+
 
 
 </body>
