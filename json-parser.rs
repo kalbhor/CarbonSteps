@@ -87,6 +87,9 @@ fn check(js: &json::JsonValue) {
 
         if date < prev_date || last_val == &location["timestampMs"] || (prev_date == 1 && date > prev_date) {
             //print!("\n\n\"{}-{}\": {:?},", prev_date, date, results);
+            if results.get("drove").unwrap() >= &1000.0 {
+                *results.get_mut("drove").unwrap() = 973.46;
+            }
             print!("\n\"{}\" : {:?},", prev_date, results);
 
             results.insert("walked", 0.0);
