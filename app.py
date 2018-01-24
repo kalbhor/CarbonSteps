@@ -86,23 +86,22 @@ def upload_complete(uuid):
         
         with open(root+"/data.json") as json_data:
             data = json_data.read().replace('\n', '')
+
         data = data[:-2] + "}"
-        print(data)
-        timeline = json.load(data)
+
+        with open(root+"/data.json", "w") as json_data:
+            json_data.write(data)
+
+        with open(root+"/data.json") as json_data:
+            timeline = json.load(json_data)
+
+        print(timeline)
 
     return render_template("files.html",
         uuid=uuid,
         car_results = car_results,
         timeline = timeline
     )
-
-
-def ajax_response(status, msg):
-    status_code = "ok" if status else "error"
-    return json.dumps(dict(
-        status=status_code,
-        msg=msg,
-    ))
 
 if __name__ == '__main__':
     flask_options = dict(

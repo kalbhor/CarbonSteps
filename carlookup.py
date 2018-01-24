@@ -9,7 +9,7 @@ def search(query):
         img_results = oprix.search(query)
     except Exception as e:
         print(e)
-        return None
+        return '', {'average' : '118.1 g/km', 'range' : '118.1 g/km'}
     maxmatch = 0
     for key in constants.EMISSIONS:
         if fuzz.ratio(img_results['brand'], key) > maxmatch:
@@ -26,5 +26,8 @@ def search(query):
 
     car = img_results['model']
 
-    return (brand + '-' + car), constants.EMISSIONS[brand]['cars'][0][match]
+    try:
+        return (img_results['brand']+ '-' + car), constants.EMISSIONS[brand]['cars'][0][match]
+    except:
+        '', {'average' : '118.1 g/km', 'range' : '118.1 g/km'}
 
