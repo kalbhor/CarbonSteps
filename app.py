@@ -6,13 +6,17 @@ import sys
 import zipfile
 from uuid import uuid4
 import carlookup
+import constants
 from imgurpython import ImgurClient
 
 app = Flask(__name__)
 imgur_client = ImgurClient('9838eb2e63fe84d','d5d86cfcb9cf55a60c59cf989085892918d674a7')
 @app.route("/")
 def index():
-    return render_template("index.html")
+    brands  = []
+    for key in constants.EMISSIONS:
+        brands.append(key.title())
+    return render_template("index.html", brands = brands)
 
 
 @app.route("/upload", methods=["POST"])
@@ -35,17 +39,19 @@ def upload():
     for key, value in list(form.items()):
         print(key, "=>", value)
 
-    car_file = request.files['car']
-    destination = "/".join([target, car_file.filename])
-    print("accept incoming file:", car_file.filename)
-    print("save it to:", destination)
-    car_file.save(destination)
+    if request.files['car']:
+        car_file = request.files['car']
+        destination = "/".join([target, car_file.filename])
+        print("accept incoming file:", car_file.filename)
+        print("save it to:", destination)
+        car_file.save(destination)
 
-    zip_file = request.files['zip']
-    destination = "/".join([target, zip_file.filename])
-    print("accept incoming file:", zip_file.filename)
-    print("save it to:", destination)
-    zip_file.save(destination)
+    if request.files['zip']:
+        zip_file = request.files['zip']
+        destination = "/".join([target, zip_file.filename])
+        print("accept incoming file:", zip_file.filename)
+        print("save it to:", destination)
+        zip_file.save(destination)
 
     return redirect(url_for("upload_complete", uuid=upload_key))
 
@@ -113,7 +119,7 @@ if __name__ == '__main__':
     flask_options = dict(
         host='0.0.0.0',
         debug=True,
-        port=80,
+        port=8080,
         threaded=True,
     )
 

@@ -15,8 +15,18 @@ uploader application combined with normal form data.<p>
    <strong>Car File:</strong><br>
     Select files OR drag them into the box below.
     <input id="file-picker" type="file" name="car" accept="image/*" multiple><p>
-    <div id="dropbox">
-        Drag and Drop Files Here
+    <div>
+        OR
+    </div><p>
+
+    <div>
+    <label for="brand">Car brand</label>
+    <select name="brand">
+    <option value="none" >None</option>
+    {% for brand in brands %}
+    <option value="{{ brand }}" >{{ brand }}</option>
+    {% endfor %}
+    </select
     </div><p>
 
     <strong>JSON Files:</strong><br>
@@ -25,7 +35,11 @@ uploader application combined with normal form data.<p>
     <div id="dropbox">
         Drag and Drop Files Here
     </div><p>
+
+
+
     <input type="submit" value="Upload!" id="upload-button">
+
 </form>
 
 
