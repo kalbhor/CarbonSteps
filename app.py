@@ -10,7 +10,7 @@ import constants
 from imgurpython import ImgurClient
 
 app = Flask(__name__)
-imgur_client = ImgurClient('9838eb2e63fe84d','d5d86cfcb9cf55a60c59cf989085892918d674a7')
+imgur_client = ImgurClient(os.environ['IMGURCLIENT'], os.environ['IMGURSECRET'])
 @app.route("/")
 def index():
     brands  = []
